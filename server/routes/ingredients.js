@@ -1,13 +1,11 @@
 import express from "express";
 import {getDb} from "../db/conn.js"
-import { ObjectId } from "mongodb";
 import {Ingredient} from "../models/ingredientsModel.js";
 
 
 export const ingredientsRoutes = express.Router();
 const dbName = "pizzas";
 const collection = "ingredients"
-//const objectId = ObjectId();
 
 // This section will help you get a list of all the records.
 ingredientsRoutes.route("/api/ingredients").get(function(req,res){
