@@ -6,31 +6,35 @@ import { NavLink } from "react-router-dom";
 
 
 const navs = [
-  {displayName:"Home",link:"#home",key:"home"},
-  {displayName:"Products",link:"#products",key:"products"},
-  {displayName:"Menu",link:"#menu",key:"menu"},
-  {displayName:"Location",link:"#location",key:"location"},
-  {displayName:"Favourites",link:"#favourites",key:"favourites"}];
+
+  {displayName:"Products",link:"/Products",key:"products"},
+  {displayName:"Menu",link:"/Menu",key:"menu"},
+  {displayName:"Location",link:"/Locations",key:"location"},
+  {displayName:"Favourites",link:"/Favourites",key:"favourites"}];
 
 const navList = navs.map((nav)=>
-  <Nav.Link href={nav.link} key={nav.key}>{nav.displayName}</Nav.Link>
+  <NavLink className="nav-link" key={nav.key} to={nav.link}>{nav.displayName}</NavLink>
 )
+
+
 
 function Header() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar  sticky="top" bg="light" expand="lg">
       <Container>
-        <NavLink className="navbar-brand" to="/">MERN-Pizza</NavLink>
+        <NavLink  className="navbar-brand" to="/">MERN-Pizza</NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             {navList}
           </Nav>
         </Navbar.Collapse>
-        <NavDropdown title="Account" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Sign In</NavDropdown.Item>
+
+
+        <NavDropdown  className="text-center" title="Account" id="basic-nav-dropdown">
+              <NavLink  className="nav-link text-center" to="/SignIn">Sign In</NavLink>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.2">Sign Up</NavDropdown.Item>
+              <NavLink className="nav-link text-center" to="/SignUp">Sign Up</NavLink>
             </NavDropdown>
       </Container>
     </Navbar>
