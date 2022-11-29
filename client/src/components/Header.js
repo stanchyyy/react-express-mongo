@@ -20,22 +20,26 @@ const navList = navs.map((nav)=>
 
 function Header() {
   return (
-    <Navbar  sticky="top" bg="light" expand="lg">
+    <Navbar sticky="top" bg="light" expand="lg">
       <Container>
-        <NavLink  className="navbar-brand" to="/">MERN-Pizza</NavLink>
+        <NavLink    className="navbar-brand" to="/">MERN-Pizza</NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          <Nav variant="pills"  className="me-auto">
             {navList}
           </Nav>
         </Navbar.Collapse>
 
 
-        <NavDropdown  className="text-center" title="Account" id="basic-nav-dropdown">
-              <NavLink  className="nav-link text-center" to="/SignIn">Sign In</NavLink>
-              <NavDropdown.Divider />
-              <NavLink className="nav-link text-center" to="/SignUp">Sign Up</NavLink>
-            </NavDropdown>
+        <Nav variant="pills"  activeKey="1" >
+      <NavDropdown title="Account"  id="nav-dropdown">
+        <NavLink className="dropdown-item" to="/SignIn" >Sign In</NavLink>
+        <NavDropdown.Divider />
+        <NavLink className="dropdown-item" to="/SignUp" >Sign Up</NavLink>
+      </NavDropdown>
+    </Nav>
+
+
       </Container>
     </Navbar>
   );
