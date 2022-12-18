@@ -3,33 +3,42 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Text from "../../local-json/products-text.json"
-import React from "react";
+import CardGroup from 'react-bootstrap/CardGroup';
+import React, { useEffect, useState } from "react";
 
 
 
-async function ListIngredients() {
+function ListIngredients() {
+    const [ingredients, setIngredients] = useState([]);
 
-    const response = await fetch("http://localhost:5001/api/ingredients");
-    const data = await response.json();
-    data.then((ingredients)=>
+useEffect(()=>{
+    const getIngredients = async()=> {
+        const ingredients = await(
+            await fetch("http://localhost:5001/api/ingredients")).json();
+            setIngredients(ingredients);
+        }
+        getIngredients();
+},[]);
+
+
+
+function MapRecords(){
+    return (
         ingredients.map((ingredient) =>
-            <Row xs={1} md={4} className="g-4">
-                <Col>
-                    <Card>
-                        <Card.Img variant="top" src="holder.js/100px160" />
-                        <Card.Body>
-                            <Card.Title>{ingredient.name}</Card.Title>
-                            <Card.Text>{ingredient.layer}</Card.Text>
-                            <Card.Text>{ingredient.saltLevel}</Card.Text>
-                            <Card.Text>{ingredient.vegan}</Card.Text>
-                            <Card.Text>{ingredient.type}</Card.Text>
-                            <Card.Text>{ingredient.spicy}</Card.Text>
-                        </Card.Body>
-                    </Card>
+                <Col key = {ingredient._id}>
+                <Card >
+                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Body>
+                        <Card.Title>{ingredient.name}</Card.Title>
+                        <Card.Text>{ingredient.layer}</Card.Text>
+                        <Card.Text>{ingredient.saltLevel}</Card.Text>
+                        <Card.Text>{String(ingredient.vegan)}</Card.Text>
+                        <Card.Text>{ingredient.type}</Card.Text>
+                        <Card.Text>{String(ingredient.spicy)}</Card.Text>
+                    </Card.Body>
+                </Card>
                 </Col>
-            </Row>
-    ));
-
+))}
 
     return (
         <Container>
@@ -37,8 +46,14 @@ async function ListIngredients() {
                 <Card.Body>
                     <Card.Title>{Text.heading}</Card.Title>
                     <Card.Text>{Text.text}</Card.Text>
-                    <h2>Dough</h2>
-                    {data}
+                        <Row xs={1} md={4} className="g-4">
+                            <Col>
+                            <h2>Dough</h2>
+                            </Col>
+                        </Row>
+                        <Row xs={1} md={3} className="g-4">
+                        {MapRecords()}
+                        </Row>
                 </Card.Body>
             </Card>
         </Container>
