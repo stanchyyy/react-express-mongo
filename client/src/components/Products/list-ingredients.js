@@ -3,9 +3,9 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Text from "../../local-json/products-text.json"
-import CardGroup from 'react-bootstrap/CardGroup';
 import React, { useEffect, useState } from "react";
-
+import {IngredientsImg} from "../../img/img.js"
+import "../../stylesheets/list-ingredients.css"
 
 
 function ListIngredients() {
@@ -27,14 +27,14 @@ function MapRecords(){
         ingredients.map((ingredient) =>
                 <Col key = {ingredient._id}>
                 <Card >
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src={IngredientsImg[ingredient.image]}/>
                     <Card.Body>
                         <Card.Title>{ingredient.name}</Card.Title>
-                        <Card.Text>{ingredient.layer}</Card.Text>
-                        <Card.Text>{ingredient.saltLevel}</Card.Text>
+                        <Card.Text>Layer : {ingredient.layer}</Card.Text>
+                        <Card.Text>Salt Level {ingredient.saltLevel}</Card.Text>
                         <Card.Text>{String(ingredient.vegan)}</Card.Text>
                         <Card.Text>{ingredient.type}</Card.Text>
-                        <Card.Text>{String(ingredient.spicy)}</Card.Text>
+                        <Card.Text>Spicy {String(ingredient.spicy)}</Card.Text>
                     </Card.Body>
                 </Card>
                 </Col>
@@ -51,7 +51,7 @@ function MapRecords(){
                             <h2>Dough</h2>
                             </Col>
                         </Row>
-                        <Row xs={1} md={3} className="g-4">
+                        <Row xs={1} md={4} className="g-4">
                         {MapRecords()}
                         </Row>
                 </Card.Body>
