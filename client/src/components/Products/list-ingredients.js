@@ -5,7 +5,10 @@ import Row from 'react-bootstrap/Row';
 import Text from "../../local-json/products-text.json"
 import React, { useEffect, useState } from "react";
 import {IngredientsImg} from "../../img/img.js"
-import "../../stylesheets/list-ingredients.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faLayerGroup,faSquare } from '@fortawesome/free-solid-svg-icons'
+import { faSquare as faSquareRegular } from "@fortawesome/free-regular-svg-icons";
+import "../styles/list-ingredients.css"
 
 
 function ListIngredients() {
@@ -20,18 +23,29 @@ useEffect(()=>{
         getIngredients();
 },[]);
 
+function MapSaltLevel(level,icon,maxLevel,altIcon){
+    let saltComponent = [];
+    for(let i=0;i<level;i++){
+        saltComponent.push(<FontAwesomeIcon icon={icon}/>)
+    }
+    for(let y=level;y<maxLevel;y++){
+        saltComponent.push(<FontAwesomeIcon icon={altIcon} />)
+    }
+    return saltComponent;
+}
+
 
 
 function MapRecords(){
     return (
         ingredients.map((ingredient) =>
                 <Col key = {ingredient._id}>
-                <Card >
-                    <Card.Img variant="top" src={IngredientsImg[ingredient.image]}/>
+                <Card>
+                    <Card.Img  src={IngredientsImg[ingredient.image]}/>
                     <Card.Body>
                         <Card.Title>{ingredient.name}</Card.Title>
-                        <Card.Text>Layer : {ingredient.layer}</Card.Text>
-                        <Card.Text>Salt Level {ingredient.saltLevel}</Card.Text>
+                        <Card.Text><FontAwesomeIcon icon={faLayerGroup} /> {ingredient.layer}</Card.Text>
+                        <Card.Text>Salt Level {MapSaltLevel(ingredient.saltLevel,faSquare,5,faSquareRegular)}</Card.Text>
                         <Card.Text>{String(ingredient.vegan)}</Card.Text>
                         <Card.Text>{ingredient.type}</Card.Text>
                         <Card.Text>Spicy {String(ingredient.spicy)}</Card.Text>

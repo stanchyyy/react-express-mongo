@@ -38,7 +38,9 @@ ingredientsRoutes.route("/api/ingredients/add").post((req,res)=>{
         req.body.layer,
         req.body.saltLevel,
         req.body.vegan,
-        req.body.spicy
+        req.body.spicy,
+        req.body.type,
+        req.body.image
     );
     if(Object.keys(req.body).length>0){
     db_connect.collection(collection).insertOne(ingredientObject,(error,result)=>{
