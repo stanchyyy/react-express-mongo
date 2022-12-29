@@ -4,6 +4,8 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Text from "../../local-json/products-text.json"
 import React, { useEffect, useState } from "react";
 import { IngredientsImg } from "../../img/img.js"
@@ -47,7 +49,7 @@ function ListIngredients() {
                             </Col>
                         </Row>;
         if(!vegan){
-            veganPill = <Row md={1} className="d-lg-none">
+            veganPill = <Row md={1} style={{ visibility: 'hidden'}}>
                             <Col className="justify-content-md-center">
                                 <Badge pill bg="success">Vegan</Badge>
                             </Col>
@@ -59,7 +61,7 @@ function ListIngredients() {
                             </Col>
                         </Row>;
         if(!spicy){
-            hotPill= <Row md={1} className="d-lg-none">
+            hotPill= <Row md={1} style={{ visibility: 'hidden'}}>
                             <Col>
                                 <Badge pill bg="danger">Hot</Badge>
                             </Col>
@@ -87,11 +89,18 @@ function ListIngredients() {
                             <Card.Title>{Pills(ingredient.vegan,ingredient.spicy)}</Card.Title>
                             <Card.Text><FontAwesomeIcon icon={faLayerGroup} /> {ingredient.layer}</Card.Text>
                             <Card.Text>Salt Level {MapSaltLevel(ingredient.saltLevel, faSquare, 5, faSquareRegular)}</Card.Text>
+                            <Stack direction="horizontal" gap={3} className="justify-content-md-center">
+                            <Button  variant="secondary">Edit</Button>
+                            <Button  variant="outline-danger">Delete</Button>
+                            </Stack>
+                            
                         </Card.Body>
                     </Card>
                 </Col>
             ))
     }
+
+    // let arrayTypes = ["Dough","Vegetables","Meat","Cheese"];
 
     return (
         <Container>
@@ -99,33 +108,37 @@ function ListIngredients() {
                 <Card.Body>
                     <Card.Title>{Text.heading}</Card.Title>
                     <Card.Text>{Text.text}</Card.Text>
-                    <Row xs={1} md={4} className="g-4">
+                    <Row xs={1} md={3} className="g-4 justify-content-md-center">
                         <Col>
                             <h2>Dough</h2>
+                            <hr className="hr hr-blurry" />
                         </Col>
                     </Row>
                     <Row xs={1} md={4} className="g-4">
                         {MapRecords("dough")}
                     </Row>
-                    <Row xs={1} md={4} className="g-4">
+                    <Row xs={1} md={3} className="g-4 justify-content-md-center">
                         <Col>
                             <h2>Vegetables</h2>
+                            <hr className="hr hr-blurry" />
                         </Col>
                     </Row>
                     <Row xs={1} md={4} className="g-4">
                         {MapRecords("vegetable")}
                     </Row>
-                    <Row xs={1} md={4} className="g-4">
+                    <Row xs={1} md={3} className="g-4 justify-content-md-center">
                         <Col>
                             <h2>Meat</h2>
+                            <hr className="hr hr-blurry" />
                         </Col>
                     </Row>
                     <Row xs={1} md={4} className="g-4">
                         {MapRecords("meat")}
                     </Row>
-                    <Row xs={1} md={4} className="g-4">
+                    <Row xs={1} md={3} className="g-4 justify-content-md-center">
                         <Col>
                             <h2>Cheese</h2>
+                            <hr className="hr hr-blurry" />
                         </Col>
                     </Row>
                     <Row xs={1} md={4} className="g-4">
