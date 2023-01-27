@@ -8,6 +8,7 @@ import Menu from "./components/Menu"
 import Locations from "./components/Locations"
 import SignUp from "./components/account/SignUp"
 import SignIn from "./components/account/SignIn"
+import Edit from "./components/Products/edit-ingredient"
 
 import {Route, Routes } from "react-router-dom"
 
@@ -21,6 +22,7 @@ function App (){
         <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/Products" element={<Products />} />
+            <Route path="/Products/edit/:id" element={<Edit/>} />
             <Route path="/Favourites" element={<Favourites />} />
             <Route path="/Menu" element={<Menu />} />
             <Route path="/Locations" element={<Locations />} />

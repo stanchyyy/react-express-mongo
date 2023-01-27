@@ -52,9 +52,9 @@ ingredientsRoutes.route("/api/ingredients/add").post((req,res)=>{
 
 // This section will help you update a single ingredient by name.
 
-ingredientsRoutes.route("/api/ingredients/update/:name").patch((req,res)=>{
+ingredientsRoutes.route("/api/ingredients/update/:id").patch((req,res)=>{
     let db_connect = getDb();
-    let nameQuery = {name: req.params.name};
+    let nameQuery = {id: req.params.id};
     let newValue = {
         $set: new Ingredient(
             req.body.name,

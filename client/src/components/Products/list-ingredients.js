@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLayerGroup, faSquare } from '@fortawesome/free-solid-svg-icons'
 import { faSquare as faSquareRegular } from "@fortawesome/free-regular-svg-icons";
 import "../styles/list-ingredients.css"
+import { Link } from "react-router-dom";
 
 
 function ListIngredients() {
@@ -90,7 +91,11 @@ function ListIngredients() {
                             <Card.Text><FontAwesomeIcon icon={faLayerGroup} /> {ingredient.layer}</Card.Text>
                             <Card.Text>Salt Level {MapSaltLevel(ingredient.saltLevel, faSquare, 5, faSquareRegular)}</Card.Text>
                             <Stack direction="horizontal" gap={3} className="justify-content-md-center">
-                            <Button  variant="secondary">Edit</Button>
+                            <Link className="btn btn-link" to={`/Products/edit/${ingredient._id}`}>
+                                <Button  variant="secondary">
+                                    Edit
+                                </Button>
+                            </Link>
                             <Button  variant="outline-danger">Delete</Button>
                             </Stack>
                             
