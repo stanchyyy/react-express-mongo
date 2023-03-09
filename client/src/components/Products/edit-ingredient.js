@@ -18,7 +18,7 @@ export default function Edit() {
     useEffect(()=>{
         async function fetchData(){
             const id = params.id.toString;
-            const response = await fetch(`http://localhost:5001/api/ingredients/update/${params.id}`);
+            const response = await fetch(`http://localhost:5001/api/ingredients/${params.id}`);
             if(!response.ok){
                 const message = `An error has occured: ${response.statusText}`;
                 window.alert(message);
@@ -57,7 +57,7 @@ export default function Edit() {
             image: form.image
     }
     await fetch(`http://localhost:5001/api/ingredients/update/${params.id}`,{
-        method : "POST",
+        method : "PATCH",
         body: JSON.stringify(editedIngredient),
         headers: {
             "Content-Type" : "application/json"

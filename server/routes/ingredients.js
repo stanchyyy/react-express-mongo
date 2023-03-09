@@ -1,7 +1,7 @@
 import express from "express";
 import {getDb} from "../db/conn.js"
 import {Ingredient} from "../models/ingredientsModel.js";
-
+import { ObjectId } from "mongodb";
 
 export const ingredientsRoutes = express.Router();
 const dbName = "pizzas";
@@ -20,11 +20,11 @@ ingredientsRoutes.route("/api/ingredients").get(function(req,res){
 })
 // This section will help you get a single ingredient by name.
 
-ingredientsRoutes.route("/api/ingredients/:name").get((req,res)=>{
-    console.log("reached find by name")
+ingredientsRoutes.route("/api/ingredients/:id").get((req,res)=>{
+    console.log("reached find by id")
     let db_connect = getDb();
-    let nameQuery = {name: req.params.name};
-    db_connect.collection(collection).findOne(nameQuery,(err,result)=>{
+    let idQuery = {_id: ObjectId(req.params.id)};
+    db_connect.collection(collection).findOne(idQuery,(err,result)=>{
         res.json(result);
     })
 })
@@ -54,17 +54,19 @@ ingredientsRoutes.route("/api/ingredients/add").post((req,res)=>{
 
 ingredientsRoutes.route("/api/ingredients/update/:id").patch((req,res)=>{
     let db_connect = getDb();
-    let nameQuery = {id: req.params.id};
+    let idQuery = {_id: ObjectId(req.params.id)};
     let newValue = {
         $set: new Ingredient(
             req.body.name,
             req.body.layer,
             req.body.saltLevel,
             req.body.vegan,
-            req.body.spicy
+            req.body.spicy,
+            req.body.type,
+            req.body.image
         )
     }
-    db_connect.collection(collection).updateOne(nameQuery,newValue,function(err,response){
+    db_connect.collection(collection).updateOne(idQuery,newValue,function(err,response){
         res.json(response);
     })
 
