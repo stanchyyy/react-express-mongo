@@ -1,3 +1,15 @@
-html {
-    background-color: aquamarine;
+body {
+    background-image: url('./img/slice.jpg');
+}
+
+#header {
+    margin-bottom: 0.5rem;
+}
+
+#home, #list-ingredients{
+    margin-bottom: 5.5rem;
+    
+}
+footer{
+    z-index: 1;
 }

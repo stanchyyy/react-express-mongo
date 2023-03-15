@@ -13,19 +13,19 @@ const navs = [
   {displayName:"Favourites",link:"/Favourites",key:"favourites"}];
 
 const navList = navs.map((nav)=>
-  <NavLink className="nav-link" key={nav.key} to={nav.link}>{nav.displayName}</NavLink>
+  <NavLink className="nav-link" key={nav.key} to={nav.link}>{nav.displayName } </NavLink>
 )
 
 
 
 function Header() {
   return (
-    <Navbar sticky="top" bg="light" expand="lg">
+    <Navbar sticky="top" bg="light" expand="lg"  id="header">
       <Container>
-        <NavLink    className="navbar-brand" to="/">MERN-Pizza</NavLink>
+        <NavLink     className="navbar-brand" to="/">MERN-Pizza</NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav variant="pills"  className="me-auto">
+          <Nav  variant="pills"   className="me-auto">
             {navList}
           </Nav>
         </Navbar.Collapse>

@@ -6,9 +6,7 @@ const copyright = `Copyright \u00A9 MERN-Pizza ${year}`;
 
 function Footer(){
     return(
-        <Navbar bg="light" expand="lg">
             <footer variant="primary">{copyright}</footer>
-        </Navbar>
-)}
+          )}
 
 export default Footer;

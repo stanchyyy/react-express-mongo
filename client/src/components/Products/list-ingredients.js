@@ -108,12 +108,13 @@ function ListIngredients() {
     // let arrayTypes = ["Dough","Vegetables","Meat","Cheese"];
 
     return (
-        <Container>
-            <Card className="text-center">
-                <Card.Body>
-                    <Card.Title>{Text.heading}</Card.Title>
-                    <Card.Text>{Text.text}</Card.Text>
-                    <Row xs={1} md={3} className="g-4 justify-content-md-center">
+        <Container id="list-ingredients">
+                    <Card className="text-center">
+            
+            <Card.Body>
+                <Card.Title>{Text.heading}</Card.Title>
+                <Card.Text>{Text.text}</Card.Text>
+                <Row xs={1} md={3} className="g-4 justify-content-md-center">
                         <Col>
                             <h2>Dough</h2>
                             <hr className="hr hr-blurry" />
@@ -149,8 +150,10 @@ function ListIngredients() {
                     <Row xs={1} md={4} className="g-4">
                         {MapRecords("cheese")}
                     </Row>
-                </Card.Body>
-            </Card>
+            </Card.Body>
+        </Card>
+        
+
         </Container>
     )
 }
