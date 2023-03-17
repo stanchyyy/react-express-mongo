@@ -10,6 +10,22 @@ body {
     margin-bottom: 5.5rem;
     
 }
+
+#list-ingredients{
+    position: relative;
+}
+
 footer{
     z-index: 1;
+}
+
+#add-ingredient-button{
+    position:fixed;
+	width:8rem;
+	height:4rem;
+	bottom:10%;
+	right:20%;
+	border-radius:4rem;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
 }

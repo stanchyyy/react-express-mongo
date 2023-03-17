@@ -6,6 +6,9 @@ import Col from 'react-bootstrap/Col';
 import SideImage from "../../img/products/edit-form-image.jpg"
 import Image from 'react-bootstrap/Image'
 import Card from 'react-bootstrap/Card';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import { layer } from "@fortawesome/fontawesome-svg-core";
 
 export default function Edit() {
     const [form, setForm] = useState({
@@ -17,6 +20,10 @@ export default function Edit() {
         type:"",
         image:""
     });
+
+    const [saltLevel,SetSaltLevel] = useState(form.saltLevel);
+
+    
 
     const params = useParams();
     const navigate = useNavigate();
@@ -75,6 +82,43 @@ export default function Edit() {
 
 };
 
+function LayerOptions(oldValue){
+    const layers = ["top","middle","bottom"];
+    let arrangedLayers = [...layers];
+    let oldLayerIndex = layers.indexOf(oldValue);
+    if(oldLayerIndex!==0){
+        let swapValue = layers[0];
+        let swapIndex = oldLayerIndex;
+        arrangedLayers[0]=oldValue;
+        arrangedLayers[swapIndex] = swapValue;
+    }
+    const result = arrangedLayers.map((layer)=>
+    <option value={layer}>{layer}</option>
+
+)
+        return result;
+}
+
+function SaltLevel(){
+
+    let result = [1,2,3,4,5].map((level) => (
+        
+
+        <Form.Check onChange={(e)=>updateForm({saltLevel: e.target.value})}
+        inline
+        label={level}
+        value={level}
+        name="group1"
+        type="radio"
+        id={`inline-${level}`}
+        />
+    ))
+    return result;
+}
+
+
+
+
 return (
         <Container>
             <Card className="text-center">
@@ -83,7 +127,54 @@ return (
                     <Card.Text>This section allows you to edit the ingredient to fix initally wrongly defined values or adjust according to changed recipe.</Card.Text>
                     <Row xs={1} md={3} className="g-4 justify-content-md-center">
                         <Col>
-                        <form onSubmit={onSubmit}>
+                        <Form onSubmit={onSubmit}>
+
+
+                        <FloatingLabel controlId="floatingInput" label="Name" className="mb-3">
+                        <Form.Control  type="text" placeholder="Name" value={form.name}
+                                onChange={(e)=>updateForm({name: e.target.value})}/>
+                        </FloatingLabel>
+
+                        <FloatingLabel controlId="floatingSelectLayer" label="Layer">
+                            <Form.Select aria-label="Floating label select layer" value={form.layer} onChange={(e)=>updateForm({layer: e.target.value})}>
+                                {LayerOptions(form.layer)}
+                                </Form.Select>
+                            </FloatingLabel>
+                        
+                        <Form.Control plaintext readOnly defaultValue="Salt Level" />
+                        <div key="inline-radio" className="mb-3">
+                        {SaltLevel()}
+                        </div>
+
+
+
+
+
+                        <div key="vegan-checkbox" className="mb-3">
+                            <Form.Check type="checkbox" id="check-api-checkbox" onChange={(e)=>updateForm({vegan: e.target.value})}>
+                            <Form.Check.Input type="checkbox" isValid />
+                            <Form.Check.Label>Vegan</Form.Check.Label>
+                        </Form.Check>
+                        </div>
+
+                        <div key="spicy-checkbox" className="mb-3">
+                            <Form.Check type="checkbox" id="check-api-checkbox">
+                            <Form.Check.Input type="checkbox" isInvalid />
+                            <Form.Check.Label>Spicy</Form.Check.Label>
+                        </Form.Check>
+                        </div>
+
+
+
+
+                        
+                        <Form.Control plaintext readOnly defaultValue="Spicy" />
+
+
+
+
+
+
                             <div className="form-group">
                                 <label htmlFor="name">Name : </label>
                                 <input type="text" className="form-control" id="name" value={form.name}
@@ -123,7 +214,7 @@ return (
                             <div className="form-group">
                                 <input type="submit" value="Update Ingredient" className="btn btn-primary" />
                             </div>
-                        </form>
+                        </Form>
                         </Col>
                         <Col>
 

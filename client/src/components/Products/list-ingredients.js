@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row';
 import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Text from "../../local-json/products-text.json"
 import React, { useEffect, useState } from "react";
 import { IngredientsImg } from "../../img/img.js"
@@ -14,6 +13,7 @@ import { faLayerGroup, faSquare } from '@fortawesome/free-solid-svg-icons'
 import { faSquare as faSquareRegular } from "@fortawesome/free-regular-svg-icons";
 import "../styles/list-ingredients.css"
 import { Link } from "react-router-dom";
+import { BsPatchPlus  } from 'react-icons/bs';
 
 
 function ListIngredients() {
@@ -112,7 +112,7 @@ function ListIngredients() {
                     <Card className="text-center">
             
             <Card.Body>
-                <Card.Title>{Text.heading}</Card.Title>
+                <Card.Title><h2>{Text.heading}</h2></Card.Title>
                 <Card.Text>{Text.text}</Card.Text>
                 <Row xs={1} md={3} className="g-4 justify-content-md-center">
                         <Col>
@@ -153,7 +153,7 @@ function ListIngredients() {
             </Card.Body>
         </Card>
         
-
+        <a href="/Add" id="add-ingredient-button" class="btn btn-success btn-lg my-float" role="button"><BsPatchPlus/> Add</a>
         </Container>
     )
 }
