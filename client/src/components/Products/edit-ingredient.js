@@ -8,7 +8,9 @@ import Image from 'react-bootstrap/Image'
 import Card from 'react-bootstrap/Card';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-import { layer } from "@fortawesome/fontawesome-svg-core";
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+
 
 export default function Edit() {
     const [form, setForm] = useState({
@@ -99,20 +101,31 @@ function LayerOptions(oldValue){
         return result;
 }
 
-function SaltLevel(){
+function SaltLevel(oldValue){
+    const [radioValue, setRadioValue] = useState(oldValue);
+    useEffect(() => { setRadioValue(oldValue)}, [oldValue] )
+    console.log(oldValue +' and the use state'+ radioValue);
 
-    let result = [1,2,3,4,5].map((level) => (
+
+    let radio = [0,1,2,3,4,5].map((level) => (
         
-
-        <Form.Check onChange={(e)=>updateForm({saltLevel: e.target.value})}
+        <Form.Check 
         inline
         label={level}
         value={level}
         name="group1"
         type="radio"
         id={`inline-${level}`}
+        checked={level.toString() === radioValue.toString()}
+        onChange={(e) => setRadioValue(e.currentTarget.value)}
         />
     ))
+
+    let result = 
+    <ButtonGroup onChange={(e)=>updateForm({saltLevel: e.target.value})}>
+        {radio}
+    </ButtonGroup>
+
     return result;
 }
 
@@ -141,9 +154,9 @@ return (
                                 </Form.Select>
                             </FloatingLabel>
                         
-                        <Form.Control plaintext readOnly defaultValue="Salt Level" />
+                        <Form.Control plaintext readOnly defaultValue="Salt Level"  />
                         <div key="inline-radio" className="mb-3">
-                        {SaltLevel()}
+                        {SaltLevel(form.saltLevel)}
                         </div>
 
 
