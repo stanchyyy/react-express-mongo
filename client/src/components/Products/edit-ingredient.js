@@ -9,7 +9,6 @@ import Card from 'react-bootstrap/Card';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
 
 
 export default function Edit() {
@@ -129,6 +128,28 @@ function SaltLevel(oldValue){
     return result;
 }
 
+function Vegan(oldValue){
+    const [checkValue, setCheckValue] = useState(false);
+    useEffect(() => { setCheckValue(oldValue)}, [oldValue] );
+    console.log(oldValue +' and the use state'+ checkValue);
+
+
+    let result = 
+    <Form.Check type="checkbox" id="check-api-checkbox">
+    <Form.Check.Input type="checkbox" isValid checked={checkValue} onChange={(e)=>{
+            if(e.target.checked){
+                setCheckValue(true);
+                updateForm({vegan: true})}
+                else {
+                    setCheckValue(false);
+                    updateForm({vegan: false})
+                    }
+            }}/>
+    <Form.Check.Label>Vegan</Form.Check.Label>
+    </Form.Check>;
+
+    return result;
+}
 
 
 
@@ -160,14 +181,8 @@ return (
                         </div>
 
 
-
-
-
                         <div key="vegan-checkbox" className="mb-3">
-                            <Form.Check type="checkbox" id="check-api-checkbox" onChange={(e)=>updateForm({vegan: e.target.value})}>
-                            <Form.Check.Input type="checkbox" isValid />
-                            <Form.Check.Label>Vegan</Form.Check.Label>
-                        </Form.Check>
+                            {Vegan(form.vegan)}
                         </div>
 
                         <div key="spicy-checkbox" className="mb-3">
