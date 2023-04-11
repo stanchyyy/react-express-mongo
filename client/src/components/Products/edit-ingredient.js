@@ -9,6 +9,8 @@ import Card from 'react-bootstrap/Card';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Stack from "react-bootstrap/esm/Stack";
 
 
 export default function Edit() {
@@ -22,7 +24,6 @@ export default function Edit() {
         image:""
     });
 
-    const [saltLevel,SetSaltLevel] = useState(form.saltLevel);
 
     
 
@@ -121,7 +122,7 @@ function SaltLevel(oldValue){
     ))
 
     let result = 
-    <ButtonGroup onChange={(e)=>updateForm({saltLevel: e.target.value})}>
+    <ButtonGroup onChange={(e)=>updateForm({saltLevel: parseInt(e.target.value)})}>
         {radio}
     </ButtonGroup>
 
@@ -135,7 +136,7 @@ function Vegan(oldValue){
 
 
     let result = 
-    <Form.Check type="checkbox" id="check-api-checkbox">
+    <Form.Check type="checkbox" id="check-api-checkbox-vegan">
     <Form.Check.Input type="checkbox" isValid checked={checkValue} onChange={(e)=>{
             if(e.target.checked){
                 setCheckValue(true);
@@ -146,6 +147,29 @@ function Vegan(oldValue){
                     }
             }}/>
     <Form.Check.Label>Vegan</Form.Check.Label>
+    </Form.Check>;
+
+    return result;
+}
+
+function Spicy(oldValue){
+    const [checkValue, setCheckValue] = useState(false);
+    useEffect(() => { setCheckValue(oldValue)}, [oldValue] );
+    console.log(oldValue +' and the use state'+ checkValue);
+
+
+    let result = 
+    <Form.Check type="checkbox" id="check-api-checkbox-spicy">
+    <Form.Check.Input type="checkbox" isInvalid checked={checkValue} onChange={(e)=>{
+            if(e.target.checked){
+                setCheckValue(true);
+                updateForm({spicy: true})}
+                else {
+                    setCheckValue(false);
+                    updateForm({spicy: false})
+                    }
+            }}/>
+    <Form.Check.Label>Spicy</Form.Check.Label>
     </Form.Check>;
 
     return result;
@@ -162,11 +186,19 @@ return (
                     <Row xs={1} md={3} className="g-4 justify-content-md-center">
                         <Col>
                         <Form onSubmit={onSubmit}>
-
-
                         <FloatingLabel controlId="floatingInput" label="Name" className="mb-3">
                         <Form.Control  type="text" placeholder="Name" value={form.name}
                                 onChange={(e)=>updateForm({name: e.target.value})}/>
+                        </FloatingLabel>
+
+                        <FloatingLabel controlId="floatingInput" label="Type" className="mb-3">
+                        <Form.Control  type="text" placeholder="Type" value={form.type}
+                                onChange={(e)=>updateForm({type: e.target.value})}/>
+                        </FloatingLabel>
+
+                        <FloatingLabel controlId="floatingInput" label="Image" className="mb-3">
+                        <Form.Control  type="text" placeholder="Image" value={form.image}
+                                onChange={(e)=>updateForm({type: e.target.value})}/>
                         </FloatingLabel>
 
                         <FloatingLabel controlId="floatingSelectLayer" label="Layer">
@@ -175,79 +207,33 @@ return (
                                 </Form.Select>
                             </FloatingLabel>
                         
+                        <InputGroup>
                         <Form.Control plaintext readOnly defaultValue="Salt Level"  />
                         <div key="inline-radio" className="mb-3">
                         {SaltLevel(form.saltLevel)}
                         </div>
-
+                        </InputGroup>
 
                         <div key="vegan-checkbox" className="mb-3">
                             {Vegan(form.vegan)}
                         </div>
 
                         <div key="spicy-checkbox" className="mb-3">
-                            <Form.Check type="checkbox" id="check-api-checkbox">
-                            <Form.Check.Input type="checkbox" isInvalid />
-                            <Form.Check.Label>Spicy</Form.Check.Label>
-                        </Form.Check>
+                            {Spicy(form.spicy)}
                         </div>
-
-
-
-
-                        
-                        <Form.Control plaintext readOnly defaultValue="Spicy" />
-
-
-
-
-
-
-                            <div className="form-group">
-                                <label htmlFor="name">Name : </label>
-                                <input type="text" className="form-control" id="name" value={form.name}
-                                onChange={(e)=>updateForm({name: e.target.value})} />
-                            </div>
-                            <div className="form-group">
-                            <label htmlFor="layer">Layer : </label>
-                            <input type="text" className="form-control" id="layer" value={form.layer}
-                            onChange= {(e)=> updateForm({layer: e.target.value})} />
-                            </div>
-                            <div className="form-group">
-                            <label htmlFor="saltLevel">Salt Level : </label>
-                            <input type="text" className="form-control" id="saltLevel" value={form.saltLevel}
-                            onChange= {(e)=> updateForm({saltLevel: e.target.value})} />
-                            </div>
-                            <div className="form-group">
-                            <label htmlFor="saltLevel">Vegan : </label>
-                            <input type="text" className="form-control" id="vegan" value={form.vegan}
-                            onChange= {(e)=> updateForm({vegan: e.target.value})} />
-                            </div>
-                            <div className="form-group">
-                            <label htmlFor="spicy">Spicy : </label>
-                            <input type="text" className="form-control" id="spicy" value={form.spicy}
-                            onChange= {(e)=> updateForm({spicy: e.target.value})} />
-                            </div>
-                            <div className="form-group">
-                            <label htmlFor="type">Type : </label>
-                            <input type="text" className="form-control" id="type" value={form.type}
-                            onChange= {(e)=> updateForm({type: e.target.value})} />
-                            </div>
-                            <div className="form-group">
-                            <label htmlFor="image">Image : </label>
-                            <input type="text" className="form-control" id="image" value={form.image}
-                            onChange= {(e)=> updateForm({image: e.target.value})} />
-                            </div>
-                            <br />
-                            <div className="form-group">
-                                <input type="submit" value="Update Ingredient" className="btn btn-primary" />
-                            </div>
+                        <br />
+                        <Form.Group as={Stack} gap={3}   className="mb-3">
+                            <Col >
+                            <input type="submit" value="Update Ingredient" className="btn btn-primary" />
+                            </Col>
+                            <Col>
+                            <input value="Cancel" className="btn btn-light" onClick={()=>navigate("/Products")} />
+                            </Col>
+                        </Form.Group>
                         </Form>
                         </Col>
                         <Col>
-
                             <Image src={SideImage} fluid/>
-
                         </Col>
                     </Row>       
                 </Card.Body>

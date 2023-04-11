@@ -9,6 +9,7 @@ import Locations from "./components/Locations"
 import SignUp from "./components/account/SignUp"
 import SignIn from "./components/account/SignIn"
 import Edit from "./components/Products/edit-ingredient"
+import Create from "./components/Products/create-ingredient"
 
 import {Route, Routes } from "react-router-dom"
 
@@ -28,6 +29,7 @@ function App (){
             <Route path="/Locations" element={<Locations />} />
             <Route path="/SignIn" element={<SignIn />} />
             <Route path="/SignUp" element={<SignUp />} />
+            <Route path="/Products/add" element={<Create/>}/>
          </Routes>
         <Footer/>
     </Container>

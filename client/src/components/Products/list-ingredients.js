@@ -77,14 +77,14 @@ function ListIngredients() {
     }
 
 
-
     function MapRecords(filter) {
         let filteredIngredients = ingredients.filter(ingredinet => ingredinet.type === filter)
         return (
             filteredIngredients.map((ingredient) =>
                 <Col key={ingredient._id}>
                     <Card>
-                        <Card.Img src={IngredientsImg[ingredient.image]} />
+                        <Card.Img src={Object.keys(IngredientsImg).includes(ingredient.image) ? IngredientsImg[ingredient.image] : IngredientsImg["null.png"]} />
+                        {/* <Card.Img src={IngredientsImg[ingredient.image]}/> */}
                         <Card.Body>
                             <Card.Title>{ingredient.name}</Card.Title>
                             <Card.Title>{Pills(ingredient.vegan,ingredient.spicy)}</Card.Title>
@@ -153,7 +153,14 @@ function ListIngredients() {
             </Card.Body>
         </Card>
         
-        <a href="/Add" id="add-ingredient-button" class="btn btn-success btn-lg my-float" role="button"><BsPatchPlus/> Add</a>
+        {/* <a href="/Products/add" id="add-ingredient-button" class="btn btn-success btn-lg my-float" role="button"><BsPatchPlus/> Add</a> */}
+
+        <Link className="btn btn-success btn-lg my-float" to={`/Products/add`} id="add-ingredient-button">
+
+                                <BsPatchPlus/> Add
+
+                            </Link>
+
         </Container>
     )
 }
