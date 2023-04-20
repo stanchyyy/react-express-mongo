@@ -15,7 +15,7 @@ import Stack from "react-bootstrap/esm/Stack";
 export default function CreateIngredient(){
     const [form, setForm] = useState({
         name: "",
-        layer: "",
+        layer: "top",
         saltLevel: 0,
         vegan: false,
         spicy:false,

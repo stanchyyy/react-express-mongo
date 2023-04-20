@@ -76,6 +76,14 @@ function ListIngredients() {
         )
     }
 
+    async function deleteRecord(id) {
+        await fetch(`http://localhost:5001/api/ingredients/delete/${id}`, {
+          method: "DELETE"
+        });
+      
+        const newIngredients = ingredients.filter((el) => el._id !== id);
+        setIngredients(newIngredients);
+      }
 
     function MapRecords(filter) {
         let filteredIngredients = ingredients.filter(ingredinet => ingredinet.type === filter)
@@ -84,7 +92,6 @@ function ListIngredients() {
                 <Col key={ingredient._id}>
                     <Card>
                         <Card.Img src={Object.keys(IngredientsImg).includes(ingredient.image) ? IngredientsImg[ingredient.image] : IngredientsImg["null.png"]} />
-                        {/* <Card.Img src={IngredientsImg[ingredient.image]}/> */}
                         <Card.Body>
                             <Card.Title>{ingredient.name}</Card.Title>
                             <Card.Title>{Pills(ingredient.vegan,ingredient.spicy)}</Card.Title>
@@ -96,7 +103,9 @@ function ListIngredients() {
                                     Edit
                                 </Button>
                             </Link>
-                            <Button  variant="outline-danger">Delete</Button>
+                            <Button  variant="outline-danger" onClick={() => {
+                                deleteRecord(ingredient._id);
+                                }}>Delete</Button>
                             </Stack>
                             
                         </Card.Body>

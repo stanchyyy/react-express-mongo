@@ -186,19 +186,19 @@ return (
                     <Row xs={1} md={3} className="g-4 justify-content-md-center">
                         <Col>
                         <Form onSubmit={onSubmit}>
-                        <FloatingLabel controlId="floatingInput" label="Name" className="mb-3">
+                        <FloatingLabel controlId="floatingInputName" label="Name" className="mb-3">
                         <Form.Control  type="text" placeholder="Name" value={form.name}
                                 onChange={(e)=>updateForm({name: e.target.value})}/>
                         </FloatingLabel>
 
-                        <FloatingLabel controlId="floatingInput" label="Type" className="mb-3">
+                        <FloatingLabel controlId="floatingInputType" label="Type" className="mb-3">
                         <Form.Control  type="text" placeholder="Type" value={form.type}
                                 onChange={(e)=>updateForm({type: e.target.value})}/>
                         </FloatingLabel>
 
-                        <FloatingLabel controlId="floatingInput" label="Image" className="mb-3">
+                        <FloatingLabel controlId="floatingInputImage" label="Image" className="mb-3">
                         <Form.Control  type="text" placeholder="Image" value={form.image}
-                                onChange={(e)=>updateForm({type: e.target.value})}/>
+                                onChange={(e)=>updateForm({image: e.target.value})}/>
                         </FloatingLabel>
 
                         <FloatingLabel controlId="floatingSelectLayer" label="Layer">
