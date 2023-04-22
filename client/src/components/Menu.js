@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
+import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
 
 
 function Menu(){
@@ -26,27 +28,54 @@ function Menu(){
             }
         })
         return (
-             Object.keys(categorizedItems).map((category)=>
-             <>
-                <h4>{category}</h4>
-                <ul>
-                {categorizedItems[category].map((item)=>{
-                    return(
-                <>
-                <li>{item.name}</li>
-                </>
-                )}
-                )}
-                </ul>
-            </>
-        ))
-    }
+            <Table  borderless hover variant="dark">
+            {Object.keys(categorizedItems).map((category)=>{
+                return (
+                    <>
+                        <thead >
+                            <tr >
+                                <th className="text-center bg-white text-dark"><h1 >{category.toUpperCase()}</h1></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {categorizedItems[category].map((item)=>{
+                                return(
+                                    <tr>
+                                        <td>
+                                        <Container className="text-center">
+                                            <Row>
+                                                <Col>
+                                                    <h4><b>{item.name}</b></h4>
+                                                    <h6 class="w3-text-grey">{item.ingredients.join(', ')}</h6>
+                                                </Col>
+                                                <Col>
+                                                <h4><b>{item.price.$numberDecimal} leva</b></h4>
+                                                </Col>
+                                            </Row>
+                                        </Container>
+                                         
+
+                                        </td>
+                                    </tr>
+                                )})}
+                        </tbody>
+                    </>
+                )
+            })}
+        </Table>
+    )}
 
 
     return (
-        <Container>
-            {categorizeMenu()}
-        </Container>
+        <Container fluid>
+        <Card className="text-center">
+
+            <Card.Body>
+                <Card.Text>{Text.text}</Card.Text>
+                {categorizeMenu()}
+            </Card.Body>
+            </Card>
+            </Container>
         );
 }
 
