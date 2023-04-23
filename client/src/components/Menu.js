@@ -44,11 +44,11 @@ function Menu(){
                                         <td>
                                         <Container className="text-center">
                                             <Row>
-                                                <Col>
+                                                <Col >
                                                     <h4><b>{item.name}</b></h4>
-                                                    <h6 class="w3-text-grey">{item.ingredients.join(', ')}</h6>
+                                                    <h6>{item.ingredients.join(', ')}</h6>
                                                 </Col>
-                                                <Col>
+                                                <Col >
                                                 <h4><b>{item.price.$numberDecimal} leva</b></h4>
                                                 </Col>
                                             </Row>

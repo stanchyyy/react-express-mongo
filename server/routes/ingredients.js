@@ -18,6 +18,19 @@ ingredientsRoutes.route("/api/ingredients").get(function(req,res){
             console.log(result)
         })
 })
+
+// This section will help you get a list of all the menu records.
+ingredientsRoutes.route("/api/menu").get(function(req,res){
+    console.log("reached menu")
+    
+    let db_connect = getDb(dbName);
+    console.log(db_connect);
+    db_connect.collection("menu").find({}).toArray((err,result)=>{
+            res.json(result);
+            console.log(result)
+        })
+})
+
 // This section will help you get a single ingredient by name.
 
 ingredientsRoutes.route("/api/ingredients/:id").get((req,res)=>{
@@ -74,10 +87,10 @@ ingredientsRoutes.route("/api/ingredients/update/:id").patch((req,res)=>{
 
 // This section will help you delete a record
 
-ingredientsRoutes.route("/api/ingredients/delete/:name").delete((req,res)=>{
+ingredientsRoutes.route("/api/ingredients/delete/:id").delete((req,res)=>{
     let db_connect = getDb();
-    let nameQuery = {name: req.params.name};
-    db_connect.collection(collection).deleteOne(nameQuery,(error,response)=>{
+    let idQuery = {_id: ObjectId(req.params.id)};
+    db_connect.collection(collection).deleteOne(idQuery,(error,response)=>{
         res.json(response);
     })
 })
