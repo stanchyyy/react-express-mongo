@@ -114,7 +114,6 @@ function ListIngredients() {
             ))
     }
 
-    // let arrayTypes = ["Dough","Vegetables","Meat","Cheese"];
 
     return (
         <Container id="list-ingredients">
